@@ -1,0 +1,5 @@
+test_core_processor (unittest.loader._FailedTest.test_core_processor) ... ERROR
+test_services_llm (unittest.loader._FailedTest.test_services_llm) ... ERROR
+test_extract_audio_fail_no_ffmpeg (test_services_media.TestMediaManager.test_extract_audio_fail_no_ffmpeg) ... ok
+test_extract_audio_fail_subprocess (test_services_media.TestMediaManager.test_extract_audio_fail_subprocess) ... ok
+test_extract_audio_success (test_services_media.TestMediaManager.test_extract_audio_success) ... ok
