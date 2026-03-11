@@ -24,8 +24,9 @@ class TestTranscriptionService(unittest.TestCase):
         self.assertEqual(result, "MLX Transcript")
         mock_mlx.transcribe.assert_called_with("dummy.mp3", path_or_hf_repo="mlx-community/Whisper-tiny")
 
+    @patch('os.path.getsize', return_value=1024)
     @patch('services.transcription.MLX_AVAILABLE', True)
-    def test_transcribe_mlx_fail_fallback_openai(self):
+    def test_transcribe_mlx_fail_fallback_openai(self, mock_getsize):
         # MLX fails
         mock_mlx = MagicMock()
         mock_mlx.transcribe.side_effect = Exception("MLX Error")
@@ -44,8 +45,9 @@ class TestTranscriptionService(unittest.TestCase):
         mock_mlx.transcribe.assert_called()
         mock_whisper.load_model.assert_called_with("base")
 
+    @patch('os.path.getsize', return_value=1024)
     @patch('services.transcription.MLX_AVAILABLE', False)
-    def test_transcribe_openai_sys_platform(self):
+    def test_transcribe_openai_sys_platform(self, mock_getsize):
         mock_whisper = MagicMock()
         mock_model = MagicMock()
         mock_model.transcribe.return_value = {"text": "Windows Transcript"}

@@ -73,8 +73,14 @@ class YouTubeManager:
                     if msg.startswith('[debug] '):
                         logger.debug(msg)
                     else:
+                        self.info(msg)
+                def info(self, msg):
+                    if msg.startswith('[download]') and '%' in msg:
+                        import sys
+                        sys.stdout.write(f"\r{msg:<100}")
+                        sys.stdout.flush()
+                    else:
                         logger.info(msg)
-                def info(self, msg): logger.info(msg)
                 def warning(self, msg): logger.warning(msg)
                 def error(self, msg): logger.error(msg)
 
@@ -83,14 +89,10 @@ class YouTubeManager:
                 'outtmpl': f"yt_{temp_id}.%(ext)s",
                 'paths': {'home': str(AUDIO_DIR)}, # Use native string path
                 'ffmpeg_location': str(Path(ffmpeg_path).parent), # Directory is often safer
-                'postprocessors': [{
-                    'key': 'FFmpegExtractAudio',
-                    'preferredcodec': 'best',
-                    # No forced preferredquality to avoid re-encoding if not needed
-                }],
                 'logger': YDLLogger(),
                 'verbose': True, # Enable verbose for more debug info in our logs
                 'noplaylist': True, # CRITICAL: Prevent downloading entire playlists to a single temp file
+                'fixup': 'never', # Prevent FixupM4a container correction entirely
             }
             
             logger.info(f"Initialized yt-dlp options with home path: {AUDIO_DIR}. Starting download...")

@@ -10,6 +10,10 @@ from utils.logger import get_logger
 logger = get_logger(__name__)
 
 if GOOGLE_API_KEY:
+    logger.info(f"Using API Key: {GOOGLE_API_KEY[:10]}...")
+    # Force reset the client in case Streamlit kept the old one in memory
+    genai.configure(api_key=GOOGLE_API_KEY)
+    genai._default_client = None 
     genai.configure(api_key=GOOGLE_API_KEY)
 
 class GeminiService:

@@ -3,7 +3,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 # Load environment variables
-load_dotenv()
+load_dotenv(override=True)
 
 # API Keys
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
@@ -11,13 +11,19 @@ if not GOOGLE_API_KEY:
     # Try to load from a local .env file if not already loaded
     env_path = Path(__file__).parent / ".env"
     if env_path.exists():
-        load_dotenv(dotenv_path=env_path)
+        load_dotenv(dotenv_path=env_path, override=True)
         GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 
 # Paths
 BASE_DIR = Path(__file__).parent.absolute()
 STORAGE_DIR = BASE_DIR / "storage"
-AUDIO_DIR = STORAGE_DIR / "audio"
+
+# Read audio path from .env (supports absolute paths) or default to local storage
+audio_path_env = os.getenv("AUDIO_STORAGE_PATH")
+if audio_path_env:
+    AUDIO_DIR = Path(audio_path_env)
+else:
+    AUDIO_DIR = STORAGE_DIR / "audio"
 
 # Ensure directories exist
 AUDIO_DIR.mkdir(parents=True, exist_ok=True)
