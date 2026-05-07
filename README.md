@@ -21,9 +21,9 @@
 
 </div>
 
-━━━━━━━━━━━━━━━━━━━━━━
+
 ## 2. OVERVIEW
-━━━━━━━━━━━━━━━━━━━━━━
+
 
 **Visum** is an intelligent orchestrator for processing rich media. As video content scales exponentially, the ability to rapidly digest, analyze, and search through hours of footage becomes critical. Visum solves this by combining **local, privacy-preserving transcription** (via Apple's MLX-optimized Whisper) with the extreme context windows and reasoning capabilities of **Google's Gemini 2.5 Flash**.
 
@@ -37,9 +37,9 @@
 - 💼 **Content Strategists**: Extract key quotes, SEO tags, and summaries from podcasts.
 - 👨‍💻 **Developers**: Build automated content ingestion pipelines via the underlying API.
 
-━━━━━━━━━━━━━━━━━━━━━━
+
 ## 3. FEATURES
-━━━━━━━━━━━━━━━━━━━━━━
+
 
 | Feature | Description | Status | Technical Notes |
 | :--- | :--- | :---: | :--- |
@@ -51,9 +51,9 @@
 | **RAG Integration** | Vector search over transcribed video segments | 🟡 Beta | Utilizing `pgvector`, `sqlalchemy`, and `psycopg` |
 | **Async Processing** | Non-blocking transcription & inference | 🟡 Beta | `asyncio` & `FastAPI` / `uvicorn` backend pending full rollout |
 
-━━━━━━━━━━━━━━━━━━━━━━
+
 ## 4. ARCHITECTURE
-━━━━━━━━━━━━━━━━━━━━━━
+
 
 Visum operates on a robust, state-machine-driven data pipeline. Below are detailed visual representations of how the system processes data, routes between agents, and retrieves context.
 
@@ -152,9 +152,9 @@ graph TD
     LLM --> FinalAnswer[Synthesized Answer]
 ```
 
-━━━━━━━━━━━━━━━━━━━━━━
+
 ## 5. TECH STACK
-━━━━━━━━━━━━━━━━━━━━━━
+
 
 ### Frontend & UI
 | Technology | Purpose | Justification |
@@ -176,9 +176,9 @@ graph TD
 | **PostgreSQL & pgvector** | Vector Store | Production-ready ACID database with native highly-efficient vector embedding support. |
 | **yt-dlp / FFmpeg** | Media Processing | Industry standard for secure, fast media streaming, downloading, and demuxing. |
 
-━━━━━━━━━━━━━━━━━━━━━━
+
 ## 6. INSTALLATION
-━━━━━━━━━━━━━━━━━━━━━━
+
 
 ### Prerequisites
 - **Python 3.12+**
@@ -217,9 +217,9 @@ graph TD
    ffmpeg -version
    ```
 
-━━━━━━━━━━━━━━━━━━━━━━
+
 ## 7. ENVIRONMENT VARIABLES
-━━━━━━━━━━━━━━━━━━━━━━
+
 
 Create a `.env` file in the root directory. Copy the structure from `.env.example`:
 
@@ -237,9 +237,9 @@ GEMINI_API_KEY="AIzaSyYourKeyHere..."
 STORAGE_PATH="./storage/audio"
 ```
 
-━━━━━━━━━━━━━━━━━━━━━━
+
 ## 8. QUICK START
-━━━━━━━━━━━━━━━━━━━━━━
+
 
 ### Launching the UI Dashboard
 Start the Streamlit application:
@@ -269,9 +269,9 @@ result = processor.summarize("https://youtube.com/watch?v=example")
 print(result.summary)
 ```
 
-━━━━━━━━━━━━━━━━━━━━━━
+
 ## 9. USAGE EXAMPLES
-━━━━━━━━━━━━━━━━━━━━━━
+
 
 ### 1. Generating a Structured Markdown Report
 ```python
@@ -299,9 +299,9 @@ You can directly interact with the YouTube metadata tool:
 python tests/test_custom_tool.py
 ```
 
-━━━━━━━━━━━━━━━━━━━━━━
+
 ## 10. PROJECT STRUCTURE
-━━━━━━━━━━━━━━━━━━━━━━
+
 
 ```text
 visum/
@@ -327,9 +327,9 @@ visum/
 └── .env                        # Environment configurations
 ```
 
-━━━━━━━━━━━━━━━━━━━━━━
+
 ## 11. CONFIGURATION
-━━━━━━━━━━━━━━━━━━━━━━
+
 
 Visum is highly configurable. Key parameters can be adjusted directly in the component initialization:
 
@@ -337,9 +337,9 @@ Visum is highly configurable. Key parameters can be adjusted directly in the com
 - **Whisper Quantization:** MLX-Whisper parameters in `services.transcription` can be tuned for fp16, int8, or int4 depending on available VRAM/Unified Memory.
 - **Audio Extraction Quality:** Set FFmpeg bitrate parameters in `services.media.py` (Default: `libmp3lame -q:a 2`).
 
-━━━━━━━━━━━━━━━━━━━━━━
+
 ## 12. AGENT CAPABILITIES
-━━━━━━━━━━━━━━━━━━━━━━
+
 
 The Phidata agents in Visum are equipped with:
 - **Tool Use (Function Calling):** Capable of autonomously fetching transcripts, channel metadata, and video duration without human intervention.
@@ -348,9 +348,9 @@ The Phidata agents in Visum are equipped with:
 
 *Limitations:* Currently, multi-agent debate (e.g., Researcher Agent vs. Writer Agent) is conceptual and being actively developed. 
 
-━━━━━━━━━━━━━━━━━━━━━━
+
 ## 13. API REFERENCE
-━━━━━━━━━━━━━━━━━━━━━━
+
 
 *(Note: FastAPI layer is currently in beta. Core logic operates via Python classes).*
 
@@ -359,33 +359,33 @@ The Phidata agents in Visum are equipped with:
 - **Description:** Main entry point for video processing.
 - **Returns:** JSON object containing `video_id`, `raw_transcript`, and `agent_summary`.
 
-━━━━━━━━━━━━━━━━━━━━━━
+
 ## 14. EVALUATION
-━━━━━━━━━━━━━━━━━━━━━━
+
 
 - **Transcription Latency (Apple M-Series):** MLX-Whisper achieves ~15x-20x real-time speed. A 1-hour audio file transcribes in ~3-4 minutes on an M2 Pro.
 - **Token Efficiency:** By utilizing Gemini 2.5 Flash, the system passes raw transcripts efficiently without complex LangChain map-reduce chunking overhead, reducing latency and preserving document cohesiveness.
 
-━━━━━━━━━━━━━━━━━━━━━━
+
 ## 15. SECURITY
-━━━━━━━━━━━━━━━━━━━━━━
+
 
 - **Secret Management:** Strictly relies on `.env` parsing via `python-dotenv`. Keys are never hardcoded.
 - **Execution Sandboxing:** Subprocesses (`subprocess.run` in `media.py`) strictly define arguments to prevent injection attacks via malicious URLs.
 - **Data Privacy:** Local transcription ensures audio files never leave your machine unless sent explicitly to the LLM for summarization. 
 
-━━━━━━━━━━━━━━━━━━━━━━
+
 ## 16. DEPLOYMENT
-━━━━━━━━━━━━━━━━━━━━━━
+
 
 Visum is currently optimized for local execution. 
 
 ### Docker (Coming Soon)
 A `Dockerfile` utilizing multi-stage builds (handling FFmpeg system dependencies alongside Python packages) is under active development.
 
-━━━━━━━━━━━━━━━━━━━━━━
+
 ## 17. TESTING
-━━━━━━━━━━━━━━━━━━━━━━
+
 
 The project uses `pytest` for comprehensive testing.
 
@@ -401,17 +401,17 @@ pytest tests/ -v
 - FFmpeg fallback logic (`test_services_media.py`)
 - UI State mutations (`test_ui_state.py`)
 
-━━━━━━━━━━━━━━━━━━━━━━
+
 ## 18. PERFORMANCE OPTIMIZATION
-━━━━━━━━━━━━━━━━━━━━━━
+
 
 - **MLX Hardware Acceleration:** By utilizing `mlx-whisper==0.4.3`, Visum bypasses PyTorch overhead on Apple Silicon, utilizing unified memory efficiently.
 - **Lazy Loading:** UI components and heavy ML models are loaded into Streamlit's `@st.cache_resource` to prevent memory leaks across re-runs.
 - **Cleanup:** `storage/` is automatically pruned of `.mp3` and `.mp4` artifacts post-transcription to save disk space.
 
-━━━━━━━━━━━━━━━━━━━━━━
+
 ## 19. ROADMAP
-━━━━━━━━━━━━━━━━━━━━━━
+
 
 - [x] Streamlit UI Implementation
 - [x] MLX-Whisper Integration
@@ -422,9 +422,9 @@ pytest tests/ -v
 - [ ] **Long-term:** Multi-modal support (analyzing video frames via Gemini Vision)
 - [ ] **Long-term:** Agent memory persistence across sessions
 
-━━━━━━━━━━━━━━━━━━━━━━
+
 ## 20. CONTRIBUTING
-━━━━━━━━━━━━━━━━━━━━━━
+
 
 We welcome contributions! 
 
@@ -437,9 +437,9 @@ We welcome contributions!
 
 *Please ensure all PRs maintain the existing code style and include tests for new functionality.*
 
-━━━━━━━━━━━━━━━━━━━━━━
+
 ## 21. FAQ
-━━━━━━━━━━━━━━━━━━━━━━
+
 
 <details>
 <summary><strong>Do I need a GPU to run this?</strong></summary>
@@ -456,24 +456,24 @@ Ensure FFmpeg is globally accessible in your system PATH. Visum uses `moviepy` a
 Yes. The modular `services.llm` and Phidata orchestrator allow you to swap in `OpenAIAgent` with minimal code changes.
 </details>
 
-━━━━━━━━━━━━━━━━━━━━━━
+
 ## 22. LICENSE
-━━━━━━━━━━━━━━━━━━━━━━
+
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
-━━━━━━━━━━━━━━━━━━━━━━
+
 ## 23. ACKNOWLEDGEMENTS
-━━━━━━━━━━━━━━━━━━━━━━
+
 
 - [Apple MLX Team](https://github.com/ml-explore/mlx) for the incredibly fast local inference framework.
 - [Phidata](https://github.com/phidatahq/phidata) for elegant agent orchestration.
 - [Streamlit](https://streamlit.io/) for the rapid UI framework.
 - [yt-dlp](https://github.com/yt-dlp/yt-dlp) for robust media extraction.
 
-━━━━━━━━━━━━━━━━━━━━━━
+
 ## 24. CONTACT / COMMUNITY
-━━━━━━━━━━━━━━━━━━━━━━
+
 
 **Project Link:** [https://github.com/your-username/visum](https://github.com/your-username/visum)  
 **Discussions:** [GitHub Discussions](#)  
