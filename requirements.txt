@@ -1,4 +1,4 @@
-phidata 
+phidata
 python-dotenv
 yfinance
 packaging
@@ -12,10 +12,10 @@ pgvector
 psycopg[binary]
 pypdf
 streamlit
-phidata
 google-generativeai
-duckduckgo-search
 youtube-transcript-api
 yt-dlp
 openai-whisper
 mlx-whisper==0.4.3
+moviepy
+pytest

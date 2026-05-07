@@ -1,6 +1,7 @@
 import sys
 import warnings
 from utils.logger import get_logger
+import mlx_whisper
 
 logger = get_logger(__name__)
 

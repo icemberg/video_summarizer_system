@@ -1,8 +1,37 @@
+# Virtual environment
 visum/
-mlx
+
+# Build artifacts (MLX C++ compilation)
 build/
+mlx/
+.dist/
+
+# Environment
 .env
-hooks
-info
-objects
-refs
+
+# Bare git artifacts (leaked from nested repos)
+hooks/
+info/
+objects/
+refs/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+
+# Logs
+*.log
+
+# Storage (downloaded audio etc.)
+storage/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+.DS_Store

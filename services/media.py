@@ -2,6 +2,8 @@ import shutil
 import subprocess
 from pathlib import Path
 from utils.logger import get_logger
+import mlx_whisper
+
 
 logger = get_logger(__name__)
 
@@ -44,7 +46,7 @@ class MediaManager:
         except subprocess.CalledProcessError:
             logger.warning("FFmpeg extraction failed. Trying moviepy fallback...")
             try:
-                from moviepy.editor import VideoFileClip
+                from moviepy import VideoFileClip
                 clip = VideoFileClip(video_path)
                 clip.audio.write_audiofile(output_path, logger=None)
                 clip.close()
