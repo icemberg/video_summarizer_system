@@ -68,14 +68,14 @@ graph TD
     classDef local fill:#064e3b,stroke:#10b981,stroke-width:2px,color:#fff;
     classDef cloud fill:#4c1d95,stroke:#8b5cf6,stroke-width:2px,color:#fff;
 
-    User([User URL Request]):::user --> UI[Streamlit Frontend]:::process
+    User(["User URL Request"]):::user --> UI[Streamlit Frontend]:::process
     UI --> Core[Core Processor]:::process
-    Core --> Check{Captions Available?}:::process
+    Core --> Check{"Captions Available?"}:::process
     
     Check -->|Yes| YTAPI[YouTube Transcript API]:::cloud
     Check -->|No| YTDLP[Download Audio via yt-dlp]:::process
     
-    YTDLP --> AudioFile(Storage: .mp3 / .wav):::process
+    YTDLP --> AudioFile("Storage: .mp3 / .wav"):::process
     AudioFile --> MLX[MLX-Whisper Local Inference]:::local
     
     YTAPI --> RawText[Raw Transcript Text]:::process
@@ -95,7 +95,7 @@ flowchart LR
     classDef router fill:#b91c1c,stroke:#fca5a5,color:#fff
     classDef agent fill:#4338ca,stroke:#818cf8,color:#fff
     
-    In[User Query] --> Router{Agent Router}:::router
+    In["User Query"] --> Router{"Agent Router"}:::router
     
     Router -->|Metadata/Stats| YT[YouTube Agent]:::agent
     Router -->|Raw Audio| Audio[Whisper Agent]:::agent
@@ -139,10 +139,10 @@ graph TD
     classDef db fill:#0369a1,stroke:#7dd3fc,color:#fff
     
     Trans[Raw Transcript] --> Chunk[Text Chunker]
-    Chunk --> Embed[Embedding Model: text-embedding-004]
-    Embed --> VecDB[(PostgreSQL + pgvector)]:::db
+    Chunk --> Embed["Embedding Model: text-embedding-004"]
+    Embed --> VecDB[("PostgreSQL + pgvector")]:::db
     
-    UserQ[User: "When did they mention Python?"] --> QEmbed[Query Embedding]
+    UserQ["User: 'When did they mention Python?'"] --> QEmbed[Query Embedding]
     QEmbed --> Search{Cosine Similarity Search}
     VecDB --> Search
     
